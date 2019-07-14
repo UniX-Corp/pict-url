@@ -30,8 +30,8 @@ const Client = new pict_url.Client();
 let category = "doggos";
 let image_link = "";
 Client.getImage(category).then(image => {
-    
-    // Image is an basic object
+
+    // Image is a basic object
     image_link = image.url;
 });
 ```
