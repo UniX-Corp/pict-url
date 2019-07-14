@@ -1,0 +1,27 @@
+{
+  "name": "@teamunix/pict-url",
+  "version": "0.1.0",
+  "description": "A basic package in order to get random image from a subreddit using imgur. Entirely customisable\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Everything is entirely customisable, from the source URL to the image link formater. More explanations are available on GitHub.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[2~our GitHub.\u001b[2~",
+  "main": "./src/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UniX-Team/pict-url"
+  },
+  "authors": [
+    {      
+      "name": "UniX",
+      "email": "teamunix.pro@gmail.com",
+      "url": "https://unix.tk"
+    },
+    {
+      "name": "OniX",
+      "email": "gauthier.delzenne@gmail.com",
+      "url": "https://unix.tk"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
