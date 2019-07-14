@@ -16,23 +16,23 @@ You can install it using [Node Package Manager](https://npmjs.org) :
 
 # How to use Pict-URL
 
-`Pict-URL` should normally be fully JS-Doc-ed in your editor, for more practicality. 
+`Pict-URL` should normally be fully JS-Doc-ed in your editor, for ease and  convenience. 
 
 Here is a short example :
 ```js
 // Importing pict-url's module
-const pict_url = require('pict-url');
+const pictURL = require('pict-url');
 
 // Creating a basic new Client instance
-const Client = new pict_url.Client();
+const Client = new pictURL.Client();
 
 // Get an image by tag
 let category = "doggos";
-let image_link = "";
-Client.getImage(category).then(image => {
+let imageLink = "";
+Client.getImage(category).then((image) => {
 
     // Image is a basic object
-    image_link = image.url;
+    imageLink = image.url;
 });
 ```
 
