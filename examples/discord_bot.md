@@ -30,9 +30,9 @@ Client.on("message", message => {
             // Get a random image of the tag given as argument
             Pict.getImage(args[1])
             .then(image => {
-                
+
                 // Sending the image in the message channel
-                message.channel.send(new Discord.MessageAttachment(image.link));
+                message.channel.send(new Discord.MessageAttachment(image.url));
             });
         };
     };
