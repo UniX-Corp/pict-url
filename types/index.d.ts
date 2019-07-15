@@ -1,4 +1,4 @@
-declare module 'unixtruc' {
+declare module 'pict-url' {
 
     //
     //#region Interface
