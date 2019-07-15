@@ -85,7 +85,7 @@ This variable is part of an object based on the ClientOptions interface which is
 const pictURL = require('pict-url');
 
 // Setting up our new urlGetter
-const urlGetter = async function (res) {
+const urlGetter = function (res) {
 
     // Simple example
     let link = res.data.first().url;
@@ -106,7 +106,7 @@ const Client = new pictURL.Client(options);
 
 The default value of `urlGetter` is :
 ```js
-async function (res) {
+function (res) {
     let img = res.data.data[Math.round(Math.random() * res.data.data.length)];
     let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
     return url;
