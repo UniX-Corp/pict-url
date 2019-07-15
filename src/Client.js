@@ -1,26 +1,23 @@
-"use strict";
+// "use strict";
 
-const axios = require("axios");
+const axios = require('axios');
+const Provider = require('./Provider');
 
 class Client {
-    constructor (options) {
-        if (!options) options = {};
-        this.categoriesURL = (options.categoriesURL && typeof options.categoriesURL === 'string' && options.categoriesURL.length !== 0) ? options.categoriesURL : "https://imgur.com/r/{{category}}/hot.json"
-        this.urlGetter = (options.urlGetter && typeof options.urlGetter === "function") ? options.urlGetter : async function (res) {
-            let img = res.data.data[Math.round(Math.random() * res.data.data.length)];
-            let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
-            return url;
-        }
+    constructor (provider) {
+        if (!provider || !(provider instanceof Provider)) throw new Error("Client instance error : provider cannot be undefined and must be an instance of Provider.");
+        this.categoriesURL = (provider.categoriesURL && typeof provider.categoriesURL === 'string' && provider.categoriesURL.length !== 0) ? provider.categoriesURL : Provider.Imgur.categoriesURL; 
+        this.urlGetter = (provider.urlGetter && typeof provider.urlGetter === "function") ? provider.urlGetter : Provider.Imgur.urlGetter;
     }
 
-    getImage (category) {
-        return new Promise(async (resolve, reject) => {
+    getImage (category) {        
+        return new Promise((resolve, reject) => {
             axios.get(this.categoriesURL.replace("{{category}}", category), { responseType : "json"})
-            .then(async (res) => {
-                let url = await this.urlGetter(res);
+            .then((res) => {
+                let url = this.urlGetter(res);
                 resolve({ url });
             })
-            .catch(async (reason) => {
+            .catch((reason) => {
                 reject(reason);
             })
         })

@@ -4,10 +4,9 @@
 `Pict-URL` is a basic package in order to get random image from a subreddit using imgur. Everything is entirely customisable, from the source URL to the image link formater.
 
 # Table of Contents
-- ### [Installation](#Installation)
-- ### [How to use Pict-URL](#How-to-use-Pict-URL)
-- ### [Customization](#Customization)
-
+- [Installation](#Installation)
+- [How to use Pict-URL](#How-to-use-Pict-URL)
+- [Customization](#Customization)
 
 # Installation
 
@@ -23,8 +22,11 @@ Here is a short example :
 // Importing pict-url's module
 const pictURL = require('pict-url');
 
+// Getting the default Provider
+const Imgur = pictURL.Provider.Imgur;
+
 // Creating a basic new Client instance
-const Client = new pictURL.Client();
+const Client = new pictURL.Client(Imgur);
 
 // Get an image by tag
 let category = "doggos";
@@ -44,9 +46,9 @@ Examples :
 
 # Customization
 
-As you create a new Pict-URL Client instance, you can provide it some options to parse and use. Options are instance-sensitive : it means that each instance uses its own options independently of others instances running in the process.
+As you create a new Pict-URL Client instance, you must provide it a Provider to use. Providers are instance-sensitive : it means that each Client instance uses its own Provider independently of others instances running in the process.
 
-These Options are called `ClientOptions`, which is basically an object, represented by these properties :
+These Providers are based on options called `ProviderOptions`, which is basically an object, represented by these properties :
 ```ts
 categoriesURL? : string;
 urlGetter? : (response : CategoriesURLResponse) => string;
