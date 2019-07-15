@@ -21,8 +21,9 @@ Here are the default values for `categoriesURL` and `urlGetter` :
 ```js
 const categoriesURL = "https://imgur.com/r/{{category}}/hot.json";
 
-const urlGetter = function (res) {
-    let img = res.data.data[Math.round(Math.random() * res.data.data.length)];
+const urlGetter = function (resp) {
+    let res = JSON.parse(resp);
+    let img = res.data[Math.round(Math.random() * res.data.length)];
     let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
     return url;
 };

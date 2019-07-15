@@ -59,6 +59,12 @@ declare module 'pict-url' {
          * @returns {Promise<Image>} A Promise including the Image
          */
         getImage (category : string) : Promise<Image>;
+
+        /**
+         * Change the Client's instance Provider in real time
+         * @param {Provider} provider The new provider to be used by the Client instance
+         */
+        set provider () : Provider;
     }
 
     /**
