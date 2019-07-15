@@ -15,7 +15,7 @@ You can install it using [Node Package Manager](https://npmjs.org) :
 
 # How to use Pict-URL
 
-`Pict-URL` should normally be fully JS-Doc-ed in your editor, for ease and  convenience. 
+`Pict-URL` should normally be fully JS-Doc-ed in your editor, for ease and convenience. 
 
 Here is a short example :
 ```js
@@ -31,6 +31,49 @@ const Client = new pictURL.Client(Imgur);
 // Get an image by tag
 let category = "doggos";
 let imageLink = "";
+Client.getImage(category).then((image) => {
+
+    // Image is a basic object
+    imageLink = image.url;
+});
+```
+
+You can switch a Client's Provider in real time. To do so, take this as an example :
+```js
+// Importing pict-url's module
+const pictURL = require('pict-url');
+
+// Setting our own Provider
+const categoriesURL = "https://imgur.com/r/{{category}}/hot.json";
+const urlGetter = function (resp) {
+    let res = JSON.parse(resp);
+    let img = res.data[Math.round(Math.random() * res.data.length)];
+    let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
+    return url;
+};
+const myAwesomeProvider = new pictURL.Provider(categoriesURL, urlGetter);
+
+// Getting the default Provider
+const Imgur = pictURL.Provider.Imgur;
+
+// Creating a basic new Client instance using Imgur
+const Client = new pictURL.Client(Imgur);
+
+// Saving our tag as a variable
+let category = "doggos";
+let imageLink = "";
+
+// Getting an image on the first provider
+Client.getImage(category).then((image) => {
+
+    // Image is a basic object
+    imageLink = image.url;
+});
+
+// Changing Provider
+Client.provider = myAwesomeProvider;
+
+// Getting an image on the second provider
 Client.getImage(category).then((image) => {
 
     // Image is a basic object

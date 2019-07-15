@@ -1,27 +1,43 @@
-// "use strict";
+"use strict";
 
-const axios = require('axios');
 const Provider = require('./Provider');
+const http = require('http');
+const https = require('https');
 
 class Client {
     constructor (provider) {
         if (!provider || !(provider instanceof Provider)) throw new Error("Client instance error : provider cannot be undefined and must be an instance of Provider.");
-        this.categoriesURL = (provider.categoriesURL && typeof provider.categoriesURL === 'string' && provider.categoriesURL.length !== 0) ? provider.categoriesURL : Provider.Imgur.categoriesURL; 
-        this.urlGetter = (provider.urlGetter && typeof provider.urlGetter === "function") ? provider.urlGetter : Provider.Imgur.urlGetter;
+        this.Provider = provider;
     }
 
     getImage (category) {        
         return new Promise((resolve, reject) => {
-            axios.get(this.categoriesURL.replace("{{category}}", category), { responseType : "json"})
-            .then((res) => {
-                let url = this.urlGetter(res);
-                resolve({ url });
-            })
-            .catch((reason) => {
-                reject(reason);
-            })
-        })
+            if (this.Provider.categoriesURL.startsWith("https")) {
+                let url = new URL(this.Provider.categoriesURL.replace("{{category}}", category));
+                https.get(url, res => {
+                    let resp = "";
+                    res.on("data", data => { resp += data });
+                    res.on("end", () => {
+                        resolve({ url : this.Provider.urlGetter(resp) });
+                    });
+                });
+            } else if (this.Provider.categoriesURL.startsWith("http")) {
+                let url = new URL(this.Provider.categoriesURL.replace("{{category}}", category));
+                http.get(url, res => {
+                    let resp = "";
+                    res.on("data", data => { resp += data });
+                    res.on("end", () => {
+                        resolve({ url : this.Provider.urlGetter(resp) });
+                    });
+                });
+            } else reject("Invalid protocol : categoriesURL must be a http or https protocol.");
+        });
+    };
+
+    set provider (provider) {
+        if (!provider || !(provider instanceof Provider)) throw new Error("Client instance error : provider cannot be undefined and must be an instance of Provider.");
+        this.Provider = provider;
     }
-}
+};
 
 module.exports = Client;

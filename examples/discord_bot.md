@@ -1,25 +1,25 @@
 # Discord Bot Example [Discord.js]
 ```js
 // Importing pict-url's and discord.js module (or any other discord's api based module)
-const pictURL = require('pict-url');
+const { Client, Provider } = require('pict-url');
 const Discord = require('discord.js');
 
 // Creating a basic new Discord Client instance
-const Client = new Discord.Client();
+const Bot = new Discord.Client();
 
 // Getting the default Provider
-const Imgur = pictURL.Provider.Imgur;
+const Imgur = Provider.Imgur;
 
 // Creating a basic new Pict-URL Client instance
-const Pict = new pictURL.Client(Imgur);
+const Pict = new Client(Imgur);
 
 // OPTIONAL :
 // Associating Pict-URL Client as a property of Discord Client
-Client.pictClient = Pict; // pictClient can be replace by other valid name
+Bot.pictClient = Pict; // pictClient can be replace by other valid name
 
 // Basic 'On Message' event listener
 let prefix = "myawesomeprefix";
-Client.on("message", (message) => {
+Bot.on("message", (message) => {
 
     // Condition : if the message starts by the prefix and a command named "randompic"
     if (message.content.startsWith(`${prefix}randompic`)) {
@@ -39,8 +39,28 @@ Client.on("message", (message) => {
             });
         };
     };
+
+    // Condition : if the message starts by the prefix and a command named "provider"
+    if (message.content.startsWith(`${prefix}provider`)) {
+
+        // Setting up our Provider list
+        let Providers = [ { "name" : "Imgur", provider : Provider.Imgur } ]
+
+        // Splitting message in order to get the tag
+        let args = message.content.split(" ");
+
+        // Condition : if a tag is provided, is a string and is longer than 0 (not an empty string)
+        if (args[1] && typeof args[1] === "string" && args[1].length > 0) {
+
+            // Check if provider exists
+            if (Providers.filter((provider) => { provider.name === agrs[1] }).length > 0) let provider = Providers.some((provider) => { provider.name === agrs[1] })[0].provider;
+
+            // Changing the Client's instance Provider to the given one
+            Pict.provider = provider;
+        };
+    };
 });
 
 // Login into the bot account
-Client.login("MY AWESOME TOKEN");
+Bot.login("MY AWESOME TOKEN");
 ```
