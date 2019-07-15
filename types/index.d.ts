@@ -1,4 +1,4 @@
-declare module 'unixtruc' {
+declare module 'pict-url' {
 
     //
     //#region Interface
@@ -9,33 +9,26 @@ declare module 'unixtruc' {
      */
     export interface Image {
         /**
-         * Represents the image's url
+         * Represents the returned image's url
          * @returns {string}
          */
         url? : string;
     }
 
-    /**
-     * This Interface is an object which keys and values depends on the CategoriesURL you have set
-     */
-    export interface CategoriesURLResponse {
+    export interface Provider {
+        getUrl(options : Client): Promise<string>;
+        format(response : Response,options: ProviderOptions) : Image;
     }
-
+    
     /**
      * Client Options Interface
      */
     export interface ClientOptions {
-        /**
-         * Represents the url for getting random links by category / tag
-         * Use {{category}} to choose the category given in the getImage's Promise
-         */
-        categoriesURL? : string;
+        providers?: Map<String,Provider>;
+    }
 
-        /**
-         * Represents the url for getting the randomly picked link
-         * See the default value on GitHub for more details
-         */
-        urlGetter? : (response : CategoriesURLResponse) => string;
+    // Define the options you pass to the provider
+    export interface ProviderOptions{
     }
 
     //
@@ -57,7 +50,7 @@ declare module 'unixtruc' {
          * @param {string} cat Imgur category
          * @returns {Promise<Image>}
          */
-        getImage (category : string) : Promise<Image>;
+        getImage (provider : string,options = undefined) : Promise<Image>;
     }
 
 }
