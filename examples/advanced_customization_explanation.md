@@ -36,7 +36,7 @@ This variable is part of an object based on the ClientOptions interface which is
 
 ```js
 // Importing pict-url's module
-const pict_url = require('pict-url');
+const pictURL = require('pict-url');
 
 // Setting up our options
 const options = {
@@ -44,7 +44,7 @@ const options = {
 };
 
 // Creating a new Client instance
-const Client = new pict_url.Client(options);
+const Client = new pictURL.Client(options);
 ```
 This properties include a replacement for the `category` value given in the `Client.getImage(category)` method. To includes the value of `category`, just put `{{category}}` in the link, like this :
 
@@ -52,7 +52,7 @@ This properties include a replacement for the `category` value given in the `Cli
 
 ```js
 // Importing pict-url's module
-const pict_url = require('pict-url');
+const pictURL = require('pict-url');
 
 // Setting up our options
 const options = {
@@ -60,7 +60,7 @@ const options = {
 };
 
 // Creating a new Client instance
-const Client = new pict_url.Client(options);
+const Client = new pictURL.Client(options);
 ```
 
 ### Default value
@@ -82,7 +82,7 @@ Changing the value of `urlGetter` forces you to change the value of `categoriesU
 This variable is part of an object based on the ClientOptions interface which is basically an Object and should be set like this :
 ```js
 // Importing pict-url's module
-const pict_url = require('pict-url');
+const pictURL = require('pict-url');
 
 // Setting up our new urlGetter
 const urlGetter = async function (res) {
@@ -99,7 +99,7 @@ const options = {
 };
 
 // Creating a new Client instance
-const Client = new pict_url.Client(options);
+const Client = new pictURL.Client(options);
 ```
 
 ### Default value
