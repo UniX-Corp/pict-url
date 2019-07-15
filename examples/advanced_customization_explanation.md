@@ -1,5 +1,8 @@
 # Advanced Customization Feature Explanation
 
+## **Obsolete**
+
+
 ## Reminder ⚡️
 
 > As you create a new Pict-URL Client instance, you can provide it some options to parse and use. Options are instance-sensitive : it means that each instance uses its own options independently of others instances running in the process.
