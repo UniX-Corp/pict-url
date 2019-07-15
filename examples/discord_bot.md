@@ -7,8 +7,11 @@ const Discord = require('discord.js');
 // Creating a basic new Discord Client instance
 const Client = new Discord.Client();
 
+// Getting the default Provider
+const Imgur = pictURL.Provider.Imgur;
+
 // Creating a basic new Pict-URL Client instance
-const Pict = new pictURL.Client();
+const Pict = new pictURL.Client(Imgur);
 
 // OPTIONAL :
 // Associating Pict-URL Client as a property of Discord Client

@@ -22,9 +22,9 @@ declare module 'pict-url' {
     }
 
     /**
-     * Client Options Interface
+     * Provider Options Interface
      */
-    export interface ClientOptions {
+    export interface ProviderOptions {
         /**
          * Represents the url for getting random links by category / tag
          * Use {{category}} to choose the category given in the getImage's Promise
@@ -48,16 +48,34 @@ declare module 'pict-url' {
     export class Client {
         /**
          * Create a new Client instance
-         * @returns {Client}
+         * @param {Provider} provider The provider used by the Client instance
+         * @returns {Client} New Client Instance
          */
-        constructor (options : ClientOptions);
+        constructor (provider : Provider);
 
         /**
-         * Get image from a specified Imgur category
-         * @param {string} cat Imgur category
-         * @returns {Promise<Image>}
+         * Get image from a specified category
+         * @param {string} cat Category
+         * @returns {Promise<Image>} A Promise including the Image
          */
         getImage (category : string) : Promise<Image>;
+    }
+
+    /**
+     * Provider Instance
+     */
+    export class Provider {
+        /**
+         * Create a new Provider instance
+         * @returns {Provider} New Provider Instance
+         */
+        constructor (options : ProviderOptions);
+
+        /**
+         * Get Imgur as a Provider
+         * @returns {Provider} Imgur as Provider
+         */
+        static Imgur : Provider;
     }
 
 }

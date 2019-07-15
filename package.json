@@ -1,6 +1,6 @@
 {
   "name": "pict-url",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A basic package in order to get random image from a subreddit using imgur. Everything is entirely customisable, from the source URL to the image link formater. More explanations are available on GitHub.",
   "main": "./src/index.js",
   "types": "./types/index.d.ts",
