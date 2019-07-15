@@ -6,7 +6,7 @@
 # Table of Contents
 - ### [Installation](#Installation)
 - ### [How to use Pict-URL](#How-to-use-Pict-URL)
-- ### [Customization](#Customization)
+- ### [Customization ( obsolete )](#Customization)
 
 
 # Installation
@@ -29,8 +29,7 @@ const Client = new pictURL.Client();
 // Get an image by tag
 let category = "doggos";
 let imageLink = "";
-Client.getImage(category).then((image) => {
-
+Client.getImage({category:category},"imgur").then((image) => {
     // Image is a basic object
     imageLink = image.url;
 });
