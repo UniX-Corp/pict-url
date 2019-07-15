@@ -28,7 +28,7 @@ Client.on("message", (message) => {
         if (args[1] && typeof args[1] === "string" && args[1].length > 0) {
 
             // Get a random image of the tag given as argument
-            Pict.getImage(args[1])
+            Pict.getImage({category:args[1]})
             .then((image) => {
 
                 // Sending the image in the message channel
