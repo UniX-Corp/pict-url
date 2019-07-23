@@ -8,7 +8,7 @@ class Provider {
     }
 }
 
-Provider.Imgur = new Provider ("https://imgur.com/r/{{category}}/hot.json", function (resp) {
+Provider.Imgur = new Provider ("https://imgur.com/r/{{category}}/hot.json", function (resp, options) {
     let res = JSON.parse(resp);
     let img = res.data[Math.round(Math.random() * res.data.length)];
     let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;

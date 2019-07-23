@@ -38,6 +38,22 @@ declare module 'pict-url' {
         urlGetter? : (response : CategoriesURLResponse) => string;
     }
 
+    /**
+     * Request Options Interface
+     */
+    export interface RequestOptions {
+        /**
+         * Represents the NodeJS http(s) request options used while the categoriesURL's get
+         */
+        categoriesURL? : Object;
+
+        /**
+         * Represents the NodeJS http(s) request options used while urlGetter parses the url.
+         * Not used by default, but can be implemented on your own Provider.
+         */
+        urlGetter? : Object;
+    }
+
     //
     //#region Classes
     //
@@ -51,7 +67,7 @@ declare module 'pict-url' {
          * @param {Provider} provider The provider used by the Client instance
          * @returns {Client} New Client Instance
          */
-        constructor (provider : Provider);
+        constructor (provider : Provider, requestOptions : RequestOptions);
 
         /**
          * Get image from a specified category
