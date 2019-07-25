@@ -12,7 +12,7 @@ declare module 'pict-url' {
          * Represents the image's url
          * @returns {string}
          */
-        url? : string;
+        url : string;
     }
 
     /**
@@ -29,13 +29,13 @@ declare module 'pict-url' {
          * Represents the url for getting random links by category / tag
          * Use {{category}} to choose the category given in the getImage's Promise
          */
-        categoriesURL? : string;
+        categoriesURL : string;
 
         /**
          * Represents the url for getting the randomly picked link
          * See the default value on GitHub for more details
          */
-        urlGetter? : (response : CategoriesURLResponse) => string;
+        urlGetter : (response : CategoriesURLResponse) => string;
     }
 
     /**
@@ -48,12 +48,52 @@ declare module 'pict-url' {
         categoriesURL? : Object;
 
         /**
-         * Represents the NodeJS http(s) request options used while urlGetter parses the url.
-         * Not used by default, but can be implemented on your own Provider.
+         * Represents the NodeJS http(s) request options used while urlGetter parses the url
+         * Not used by default, but can be implemented on your own Provider
          */
         urlGetter? : Object;
     }
 
+    /**
+     * SQL Structure Interface
+     */
+    export interface SQLStructure {
+        /**
+         * Represents the format used in the tables' name
+         * Use {{category}} to choose the category given in the getImage's Promise
+         */
+        tablesFormat : string;
+
+        /**
+         * Represents an Array of availables categories as strings
+         * Only give the categories names you want to use in the getImage's Promise
+         */
+        categoriesAvailables : Array<string>;
+    }
+
+    /**
+     * SQLite Options Interface
+     */
+    export interface SQLiteOptions {
+        /**
+         * Represents the file path to use
+         * Must be a SQLite file
+         */
+        file : string;
+
+        /**
+         * Providers use a local http Server in order to create a Provider requesting locally
+         * Represents the http Server port to listen on
+         */
+        port : number;
+
+        /**
+         * Represents the SQL Structure
+         * Used for both MySQL & SQLite Providers
+         */
+        structure : SQLStructure;
+    }
+     
     //
     //#region Classes
     //
@@ -67,7 +107,7 @@ declare module 'pict-url' {
          * @param {Provider} provider The provider used by the Client instance
          * @returns {Client} New Client Instance
          */
-        constructor (provider : Provider, requestOptions : RequestOptions);
+        constructor (provider : Provider, requestOptions? : RequestOptions);
 
         /**
          * Get image from a specified category
