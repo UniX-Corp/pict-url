@@ -21,9 +21,17 @@ class SQLiteProvider extends BaseProvider {
             });
         }).listen(options.port);
 
-        super("http://localhost/pict-url?category={{category}}", function (res, options) {
-
-        });
+        if (options.urlGetter) {
+        	super("http://localhost/pict-url?category={{category}}",options.urlGetter);
+        } else {
+        	super("http://localhost/pict-url?category={{category}}", function (res, options) {
+				if (typeof res === "array") {
+				
+				} else if (typeof res === "object") {
+				
+				} else throw new Error("FileProvider request error : response should either be array or object, found invalid type.");
+        	});
+        }
     }
 }
 
