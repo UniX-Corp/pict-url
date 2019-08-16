@@ -12,8 +12,12 @@ class SQLiteProvider extends BaseProvider {
         options.port = (options.port && typeof options.port === "number") ? options.port : 8080;
         this.Server = http.createServer((req, res) => {
             let query = url.parse(req.url).query;
+            if (!options.SQLStructure.categoriesAvailables.includes(query.category)) {
+                req.end();
+                return;
+            };
             sqlite.open(options.file).then(db => {
-                db.get(`SELECT * FROM ${options.structure.tablesFormat.replace("{{category}}", query.category)}`).then(rows => {
+                db.get(`${options.SQLStructure.query.replace("{{category}}", query.category)}`).then(rows => {
                     req.end(rows);
                 }).catch(reason => {
                     throw new Error(reason);
@@ -24,13 +28,7 @@ class SQLiteProvider extends BaseProvider {
         if (options.urlGetter) {
         	super("http://localhost/pict-url?category={{category}}",options.urlGetter);
         } else {
-        	super("http://localhost/pict-url?category={{category}}", function (res, options) {
-				if (typeof res === "array") {
-				
-				} else if (typeof res === "object") {
-				
-				} else throw new Error("FileProvider request error : response should either be array or object, found invalid type.");
-        	});
+        	throw new Error("SQLite Provider Error : urlGetter must be given.");
         }
     }
 }

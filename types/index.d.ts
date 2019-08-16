@@ -59,10 +59,11 @@ declare module 'pict-url' {
      */
     export interface SQLStructure {
         /**
-         * Represents the format used in the tables' name
+         * Represents the SQL Query to execute on the categoriesURL request
+         * Should look like 'SELECT * FROM myCoolTable WHERE `cat`="{{category}}"'
          * Use {{category}} to choose the category given in the getImage's Promise
          */
-        tablesFormat : string;
+        query : string;
 
         /**
          * Represents an Array of availables categories as strings
@@ -91,7 +92,43 @@ declare module 'pict-url' {
          * Represents the SQL Structure
          * Used for both MySQL & SQLite Providers
          */
-        structure : SQLStructure;
+        SQLStructure : SQLStructure;
+    }
+
+    /**
+     * File Format Interface
+     */
+    export interface FileFormat {
+        /**
+         * Represents the path to the folder where the JSON files are stored
+         * Calculated by `path.resolve(__dirname, FileFormat.path, FileFormat.name.replace("{{category}}", query.category));`
+         */
+        path : string;
+
+        /**
+         * Represents the name of the JSON file, and should end by .json
+         * Use {{category}} to choose the category given in the getImage's Promise
+         * @example {{category}}.json
+         */
+        name : string;
+    }
+
+    /**
+     * File Options Interface
+     */
+    export interface FileOptions {
+
+        /**
+         * Providers use a local http Server in order to create a Provider requesting locally
+         * Represents the http Server port to listen on
+         */
+        port : number;
+
+        /**
+         * Represents the folders and files formats
+         * Used for File Providers only
+         */
+        FileFormat : FileFormat;
     }
      
     //
