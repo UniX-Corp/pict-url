@@ -130,7 +130,7 @@ declare module 'pict-url' {
          */
         FileFormat : FileFormat;
     }
-     
+
     //
     //#region Classes
     //
@@ -142,21 +142,22 @@ declare module 'pict-url' {
         /**
          * Create a new Client instance
          * @param {Provider} provider The provider used by the Client instance
+         * @param requestOptions
          * @returns {Client} New Client Instance
          */
         constructor (provider : Provider, requestOptions? : RequestOptions);
 
         /**
          * Get image from a specified category
-         * @param {string} cat Category
+         * @param {string} category
          * @returns {Promise<Image>} A Promise including the Image
          */
         getImage (category : string) : Promise<Image>;
 
         /**
          * Change the Client's instance Provider in real time
-         * @param {Provider} provider The new provider to be used by the Client instance
          */
+        // @ts-ignore
         set provider () : Provider;
     }
 

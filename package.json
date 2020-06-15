@@ -22,6 +22,11 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "eslint": "^6.4.0",
+    "mysql": "^2.17.1",
     "sqlite": "^3.0.3"
+  },
+  "devDependencies": {
+    "rethinkdbdash": "^2.3.31"
   }
 }
