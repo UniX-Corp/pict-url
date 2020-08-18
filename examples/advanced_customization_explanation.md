@@ -9,7 +9,7 @@
 
 ```ts
 categoriesURL? : string;
-urlGetter? : (response : CategoriesURLResponse) => string;
+URLGetter? : (response : CategoriesURLResponse) => string;
 ```
 
 # Modifying these properties
@@ -21,29 +21,27 @@ Here are the default values for `categoriesURL` and `urlGetter` :
 ```js
 const categoriesURL = "https://imgur.com/r/{{category}}/hot.json";
 
-const urlGetter = function (resp) {
-    let res = JSON.parse(resp);
+const URLGetter = (res) => {
+    res = JSON.parse(res);
     let img = res.data[Math.round(Math.random() * res.data.length)];
-    let url = `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
-    return url;
+    return `http://imgur.com/${img.hash}${img.ext.replace(/\?.*/, '')}`;
 };
 
-const Provider = new pictURL.Provider(categoriesURL, urlGetter);
+const Provider = new pictURL.Provider(categoriesURL, URLGetter);
 ```
 
 ## Instantiating your own Provider
 
-If you want to instanciate your own Provider, you must give it a new value for both `categoriesURL` and `urlGetter` properties. To do so, you'll need to setup them as shown above. Here is a short example :
+If you want to instantiate your own Provider, you must give it a new value for both `categoriesURL` and `urlGetter` properties. To do so, you'll need to set up them as shown above. Here is a short example :
 
 ```js
 const categoriesURL = "myawesomesite/lists/{{category}}.json";
 
-const urlGetter = function (res) {
-    let link = res.data.image.url;
-    return link;
+const URLGetter = (res) => {
+    return res.data.image.url;
 };
 
-const Provider = new pictURL.Provider(categoriesURL, urlGetter);
+const Provider = new pictURL.Provider(categoriesURL, URLGetter);
 ```
 
 ## Properties Reminder
