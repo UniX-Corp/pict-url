@@ -12,7 +12,7 @@ declare module 'pict-url' {
          * Represents the image's url
          * @returns {string}
          */
-        url : string;
+        url: string;
     }
 
     /**
@@ -29,13 +29,13 @@ declare module 'pict-url' {
          * Represents the url for getting random links by category / tag
          * Use {{category}} to choose the category given in the getImage's Promise
          */
-        categoriesURL : string;
+        categoriesURL: string;
 
         /**
          * Represents the url for getting the randomly picked link
          * See the default value on GitHub for more details
          */
-        urlGetter : (response : CategoriesURLResponse) => string;
+        URLGetter: (response: CategoriesURLResponse) => string;
     }
 
     /**
@@ -45,13 +45,13 @@ declare module 'pict-url' {
         /**
          * Represents the NodeJS http(s) request options used while the categoriesURL's get
          */
-        categoriesURL? : Object;
+        categoriesURL?: Object;
 
         /**
-         * Represents the NodeJS http(s) request options used while urlGetter parses the url
+         * Represents the NodeJS http(s) request options used while URLGetter parses the url
          * Not used by default, but can be implemented on your own Provider
          */
-        urlGetter? : Object;
+        URLGetter?: Object;
     }
 
     /**
@@ -63,13 +63,13 @@ declare module 'pict-url' {
          * Should look like 'SELECT * FROM myCoolTable WHERE `cat`="{{category}}"'
          * Use {{category}} to choose the category given in the getImage's Promise
          */
-        query : string;
+        query: string;
 
         /**
-         * Represents an Array of availables categories as strings
+         * Represents an Array of available categories as strings
          * Only give the categories names you want to use in the getImage's Promise
          */
-        categoriesAvailables : Array<string>;
+        categoriesAvailable: Array<string>;
     }
 
     /**
@@ -80,19 +80,19 @@ declare module 'pict-url' {
          * Represents the file path to use
          * Must be a SQLite file
          */
-        file : string;
+        file: string;
 
         /**
-         * Providers use a local http Server in order to create a Provider requesting locally
+         * providers use a local http Server in order to create a Provider requesting locally
          * Represents the http Server port to listen on
          */
-        port : number;
+        port: number;
 
         /**
          * Represents the SQL Structure
-         * Used for both MySQL & SQLite Providers
+         * Used for both MySQL & SQLite providers
          */
-        SQLStructure : SQLStructure;
+        SQLStructure: SQLStructure;
     }
 
     /**
@@ -103,14 +103,14 @@ declare module 'pict-url' {
          * Represents the path to the folder where the JSON files are stored
          * Calculated by `path.resolve(__dirname, FileFormat.path, FileFormat.name.replace("{{category}}", query.category));`
          */
-        path : string;
+        path: string;
 
         /**
          * Represents the name of the JSON file, and should end by .json
          * Use {{category}} to choose the category given in the getImage's Promise
          * @example {{category}}.json
          */
-        name : string;
+        name: string;
     }
 
     /**
@@ -119,16 +119,16 @@ declare module 'pict-url' {
     export interface FileOptions {
 
         /**
-         * Providers use a local http Server in order to create a Provider requesting locally
+         * providers use a local http Server in order to create a Provider requesting locally
          * Represents the http Server port to listen on
          */
-        port : number;
+        port: number;
 
         /**
          * Represents the folders and files formats
-         * Used for File Providers only
+         * Used for File providers only
          */
-        FileFormat : FileFormat;
+        FileFormat: FileFormat;
     }
 
     //
@@ -145,20 +145,20 @@ declare module 'pict-url' {
          * @param requestOptions
          * @returns {Client} New Client Instance
          */
-        constructor (provider : Provider, requestOptions? : RequestOptions);
+        constructor (provider: Provider, requestOptions?: RequestOptions);
 
         /**
          * Get image from a specified category
          * @param {string} category
          * @returns {Promise<Image>} A Promise including the Image
          */
-        getImage (category : string) : Promise<Image>;
+        getImage(category: string): Promise<Image>;
 
         /**
          * Change the Client's instance Provider in real time
          */
         // @ts-ignore
-        set provider () : Provider;
+        set provider(): Provider;
     }
 
     /**
@@ -169,13 +169,12 @@ declare module 'pict-url' {
          * Create a new Provider instance
          * @returns {Provider} New Provider Instance
          */
-        constructor (options : ProviderOptions);
+        constructor(options: ProviderOptions);
 
         /**
          * Get Imgur as a Provider
          * @returns {Provider} Imgur as Provider
          */
-        static Imgur : Provider;
+        static Imgur: Provider;
     }
-
 }
