@@ -23,7 +23,7 @@ module.exports = class MongoDB extends BaseProvider {
 				const query = parse(req.url).query;
 				mongo.collection(options.config.collection).findOne({ category: query.category })
 					.then((results) => req.end(results))
-					.catch((error) => throw new Error(`MongoDB - Failed to retrieve data error: ${inspect(error)}`))
+					.catch((error) => throw new Error(`MongoDB - Failed to retrieve data error: ${inspect(error)}`));
 			}),
 		};
 
